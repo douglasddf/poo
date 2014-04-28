@@ -290,41 +290,51 @@ public final class Arquivos {
 
 			// recuperando da pasta arquivos
 			
-			File file = new File("arquivos");
-			if (file.isDirectory()) {
-				System.out.println("eh pasta");
-				
-				String[] files = file.list();
-				if (files.length != 0) {
-				
-					ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-					
-					for (int i = 0; i < files.length; i++) {
-						System.out.println(files[i]);
-						
-						int index = files[i].indexOf("_");
-						String codigo = files[i].substring(index+1);
-						System.out.println(codigo);
-						
-						Aluno aluno = recuperarAlunoDeArquivo(Integer.parseInt(codigo));
-						if (aluno != null) {
-							alunos.add(aluno);
-						}
-					}
-					
-					for (Aluno aluno : alunos) {
-						System.out.println(aluno);
-					}
-					
-				}
-				
-				
-			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+
+	private static void prepararDados(final File file) {
+		
+		if (file.isDirectory()) {
+			System.out.println("pasta existente...");
+			
+		} else {
+			System.out.println("criando pasta ...");
+			file.mkdir();
+		}
+	}
+
+	public static ArrayList<Aluno> processarArquivos() {
+		
+		File file = new File("arquivos");
+		prepararDados(file);
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+		
+		String[] files = file.list();
+		if (files.length != 0) {
+		
+			for (int i = 0; i < files.length; i++) {
+				
+				int index = files[i].indexOf("_");
+				String codigo = files[i].substring(index+1);
+				
+				Aluno aluno = recuperarAlunoDeArquivo(Integer.parseInt(codigo));
+				if (aluno != null) {
+					alunos.add(aluno);
+				}
+			}
+			
+			System.out.println("CARREGANDO DADOS...");
+			for (Aluno aluno : alunos) {
+				System.out.println(aluno);
+			}
+		}
+		
+		return alunos;
 	}
 
 

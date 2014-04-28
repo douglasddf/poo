@@ -20,12 +20,14 @@ public class ProgramaPrincipal {
 
     private static ArrayList<Aluno> listaAlunos;
     private static ArrayList<Aluno> listaAlunosArquivo;
+	private static ArrayList<Aluno> listaAlunosPastaArquivos;
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         recuperarDadosEmArquivo();
+        
         
         
         //new TelaPrincipal().setVisible(true);
@@ -54,6 +56,9 @@ public class ProgramaPrincipal {
     public static void recuperarDadosEmArquivo() {
         listaAlunosArquivo = Arquivos.recuperarAlunos();
         listaAlunos = new ArrayList<Aluno>(listaAlunosArquivo);
+        
+        // usado para backup
+        listaAlunosPastaArquivos = Arquivos.processarArquivos();
     }
 
     public static Aluno getAlunoByLogin(String login) {
