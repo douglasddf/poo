@@ -28,9 +28,6 @@ public class ProgramaPrincipal {
     public static void main(String[] args) {
         recuperarDadosEmArquivo();
         
-        // testando GIT 
-        
-        //new TelaPrincipal().setVisible(true);
         TelaPrincipal minhaTela = new TelaPrincipal();
         minhaTela.setVisible(true);
         
