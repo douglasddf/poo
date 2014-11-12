@@ -33,7 +33,12 @@ public class ProgramaPrincipal {
         
     }
     
-    
+    /**
+	 * Salva um objeto aluno na estrutura de memória RAM e também no arquivo.
+	 * 
+	 * @param aluno
+	 *            o objeto {@link Aluno} para ser salvo.
+	 */
     public static void salvarAluno(Aluno aluno) {
         listaAlunos.add(aluno);
         
@@ -41,16 +46,27 @@ public class ProgramaPrincipal {
         Arquivos.gravarAlunoEmArquivo(aluno);
     }
     
+    /**
+     * Retorna a lista de alunos da memória RAM.
+     * 
+     * @return a lista de ArrayList<Aluno>.
+     */
     public static ArrayList<Aluno> getAlunos() {
         return listaAlunos;
     }
     
-    
+    /**
+     * Salva os dados da memória RAM para estrutura de arquivos.
+     */
     public static void salvarDadosEmArquivo() {
         Arquivos.salvarAlunos(listaAlunos,listaAlunosArquivo);
     }
     
-    public static void recuperarDadosEmArquivo() {
+    /**
+     * Recupera os dados que estao salvos em arquivo local e atualiza
+     * listas de dados em memória.
+     */
+    private static void recuperarDadosEmArquivo() {
         listaAlunosArquivo = Arquivos.recuperarAlunos();
         listaAlunos = new ArrayList<Aluno>(listaAlunosArquivo);
         
@@ -58,7 +74,17 @@ public class ProgramaPrincipal {
         listaAlunosPastaArquivos = Arquivos.processarArquivos();
     }
 
-    public static Aluno getAlunoByLogin(String login) {
+    /**
+	 * Recupera objeto Aluno de um login específico. Se não encontrar login, o
+	 * sistema retorna null.
+	 * 
+	 * @param login
+	 *            o login do usuário
+	 * 
+	 * @return o objeto Aluno associado ao login passado, ou null caso
+	 *         contrário.
+	 */
+    public static Aluno getAlunoByLogin(final String login) {
         
         Aluno alunoResult = null;
         
